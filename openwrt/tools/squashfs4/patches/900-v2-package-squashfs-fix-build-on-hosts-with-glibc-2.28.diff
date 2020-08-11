@@ -1,0 +1,24 @@
+Based on https://patchwork.ozlabs.org/patch/964987/
+
+diff -ru squashfs4.2.orig/squashfs-tools/mksquashfs.c squashfs4.2/squashfs-tools/mksquashfs.c
+--- squashfs4.2.orig/squashfs-tools/mksquashfs.c        2020-01-25 13:30:32.243567307 +0000
++++ squashfs4.2/squashfs-tools/mksquashfs.c     2020-01-25 13:31:01.703733807 +0000
+@@ -47,6 +47,7 @@
+ #include <sys/ioctl.h>
+ #include <sys/types.h>
+ #include <sys/mman.h>
++#include <sys/sysmacros.h>
+ #include <pthread.h>
+ #include <math.h>
+ #include <regex.h>
+diff -ru squashfs4.2.orig/squashfs-tools/unsquashfs.c squashfs4.2/squashfs-tools/unsquashfs.c
+--- squashfs4.2.orig/squashfs-tools/unsquashfs.c        2020-01-25 13:30:32.242483974 +0000
++++ squashfs4.2/squashfs-tools/unsquashfs.c     2020-01-25 13:30:49.561733937 +0000
+@@ -30,6 +30,7 @@
+ #include "xattr.h"
+
+ #include <sys/types.h>
++#include <sys/sysmacros.h>
+
+ struct cache *fragment_cache, *data_cache;
+ struct queue *to_reader, *to_deflate, *to_writer, *from_writer;

@@ -1,0 +1,20 @@
+--- mtd-utils-1.4.5-orig/include/common.h       2020-01-25 09:49:37.222469284 +0000
++++ mtd-utils-1.4.5/include/common.h    2020-01-25 10:13:18.177469297 +0000
+@@ -24,6 +24,7 @@
+ #include <ctype.h>
+ #include <string.h>
+ #include <fcntl.h>
++#include <sys/sysmacros.h>
+ #include <errno.h>
+
+ #ifndef PROGRAM_NAME
+--- mtd-utils-1.4.5-orig/mkfs.ubifs/mkfs.ubifs.h        2020-01-25 09:49:37.228469284 +0000
++++ mtd-utils-1.4.5/mkfs.ubifs/mkfs.ubifs.h     2020-01-25 10:20:13.610468702 +0000
+@@ -54,6 +54,7 @@
+ #include <ctype.h>
+ #include <uuid/uuid.h>
+ #include <sys/file.h>
++#include <sys/sysmacros.h>
+
+ #include "libubi.h"
+ #include "defs.h"

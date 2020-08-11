@@ -1,0 +1,41 @@
+author	Paul Eggert <eggert@cs.ucla.edu>	2018-03-05 10:56:29 -0800
+committer	Paul Eggert <eggert@cs.ucla.edu>	2018-03-05 11:24:12 -0800
+commit	4af4a4a71827c0bc5e0ec67af23edef4f15cee8e (patch)
+tree	d963644620b0fd507673d4b2bc943eec2f77db44 /lib/freadahead.c
+parent	0404c9ae2845cbf93d71b295b67d6c8bd39382d8 (diff)
+download	gnulib-4af4a4a71827c0bc5e0ec67af23edef4f15cee8e.tar.gz
+fflush: adjust to glibc 2.28 libio.h removal
+Problem reported by Daniel P. Berrangé in:
+https://lists.gnu.org/r/bug-gnulib/2018-03/msg00000.html
+* lib/fbufmode.c (fbufmode):
+* lib/fflush.c (clear_ungetc_buffer_preserving_position)
+(disable_seek_optimization, rpl_fflush):
+* lib/fpending.c (__fpending):
+* lib/fpurge.c (fpurge):
+* lib/freadable.c (freadable):
+* lib/freadahead.c (freadahead):
+* lib/freading.c (freading):
+* lib/freadptr.c (freadptr):
+* lib/freadseek.c (freadptrinc):
+* lib/fseeko.c (fseeko):
+* lib/fseterr.c (fseterr):
+* lib/fwritable.c (fwritable):
+* lib/fwriting.c (fwriting):
+Check _IO_EOF_SEEN instead of _IO_ftrylockfile.
+* lib/stdio-impl.h (_IO_IN_BACKUP) [_IO_EOF_SEEN]:
+Define if not already defined.
+
+diff --git a/lib/freadahead.c b/lib/freadahead.c
+index c2ecb5b28..23ec76ee5 100644
+--- a/gnulib/lib/freadahead.c
++++ b/gnulib/lib/freadahead.c
+@@ -30,7 +30,7 @@ extern size_t __sreadahead (FILE *);
+ size_t
+ freadahead (FILE *fp)
+ {
+-#if defined _IO_ferror_unlocked     /* GNU libc, BeOS */
++#if defined _IO_EOF_SEEN || __GNU_LIBRARY__ == 1 /* GNU libc, BeOS, Haiku, Linux libc5 */
+   if (fp->_IO_write_ptr > fp->_IO_write_base)
+     return 0;
+   return (fp->_IO_read_end - fp->_IO_read_ptr)
+

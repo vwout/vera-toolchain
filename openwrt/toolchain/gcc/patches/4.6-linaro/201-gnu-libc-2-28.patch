@@ -1,0 +1,30 @@
+Based on: https://github.com/DragonFlyBSD/DPorts/issues/136
+
+--- a/gcc/cp/cfns.h.orig                          2020-01-25 15:17:35.646448701 +0000
++++ b/gcc/cp/cfns.h 2020-01-25 15:19:22.174946773 +0000
+@@ -49,16 +49,25 @@
+ <http://www.gnu.org/licenses/>.  */
+ #ifdef __GNUC__
+ __inline
++#ifdef __GNUC_STDC_INLINE__
++__attribute__ ((__gnu_inline__))
++#endif
+ #endif
+ static unsigned int hash (const char *, unsigned int);
+ #ifdef __GNUC__
+ __inline
++#ifdef __GNUC_STDC_INLINE__
++__attribute__ ((__gnu_inline__))
++#endif
+ #endif
+ const char * libc_name_p (const char *, unsigned int);
+ /* maximum key range = 391, duplicates = 0 */
+
+ #ifdef __GNUC__
+ __inline
++#ifdef __GNUC_STDC_INLINE__
++__attribute__ ((__gnu_inline__))
++#endif
+ #else
+ #ifdef __cplusplus
+ inline
